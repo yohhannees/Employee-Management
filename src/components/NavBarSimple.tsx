@@ -120,7 +120,7 @@ export function NavbarSimple() {
   ));
 
   return (
-    <Navbar height={700} width={{ sm: 300 }} p="md">
+    <Navbar height={700} width={{ sm: 200 }} p="md"  className="fixed left-0">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           <div>Logo</div>

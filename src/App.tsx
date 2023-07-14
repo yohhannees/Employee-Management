@@ -4,7 +4,7 @@ import { EmployeeList } from "./components/EmployeeList";
 import axios from "axios";
 import { Employee } from "./components/Employee";
 import TreeNodeComponent from "./components/TreeNodeComponent";
-
+import { NavbarSimple } from "./components/NavBarSimple";
 
 const App: React.FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
@@ -25,14 +25,19 @@ const App: React.FC = () => {
 
   return (
     <>
-    {/* <NavbarSimple/> */}
-
-      <div className="container mx-auto p-4">
-        <div className="grid grid-cols-2 gap-8">
-          <EmployeeForm onSubmit={handleCreateOrUpdateEmployee} />
-          <EmployeeList />
-          <TreeNodeComponent />        
+      <div>
+        <NavbarSimple />
+      </div>
+      <div className="container mx-auto ">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <EmployeeForm onSubmit={handleCreateOrUpdateEmployee} />
+          </div>
+          <div>
+            <TreeNodeComponent />
+          </div>
         </div>
+        
       </div>
     </>
   );

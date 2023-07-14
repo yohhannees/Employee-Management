@@ -24,9 +24,9 @@ export const EmployeeForm = ({ onSubmit }: EmployeeFormProps) => {
   };
 
   return (
-    <form
+    <form 
       onSubmit={handleSubmit(onSubmit || handleCreateOrUpdateEmployee)}
-      className="space-y-4"
+      className="space-y-4 ml-auto"
     >
       <div>
         <label htmlFor="name" className="block mb-1">
