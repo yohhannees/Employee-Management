@@ -5,7 +5,7 @@ import axios from "axios";
 import { Employee } from "./components/Employee";
 import TreeNodeComponent from "./components/TreeNodeComponent";
 import { NavbarSimple } from "./components/NavBarSimple";
-
+import HeaderNav from "./components/HeaderNav";
 const App: React.FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null
@@ -27,6 +27,7 @@ const App: React.FC = () => {
     <>
       <div>
         <NavbarSimple />
+        <HeaderNav />
       </div>
       <div className="container mx-auto ">
         <div className="grid grid-cols-2 gap-2">

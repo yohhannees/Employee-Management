@@ -119,6 +119,12 @@
       "name": "Peter",
       "position": "HR",
       "parentId": 1
+    },
+    {
+      "name": "Yohannes",
+      "position": "CTO",
+      "parentId": 1,
+      "id": 21
     }
   ]
 }
