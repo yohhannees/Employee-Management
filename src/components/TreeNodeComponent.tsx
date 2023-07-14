@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Text, Badge, useMantineTheme } from "@mantine/core";
+import { Card, Text, Badge, useMantineTheme, Button } from "@mantine/core";
 
 import { positions } from "./PositionLabel";
 
@@ -73,27 +74,10 @@ const TreeNodeComponent = ({ node, depth, onPositionClick }: Props) => {
         onClick={handleClick}
         style={{ paddingLeft: `${depth * 1.5}rem` }}
       >
-        <Text weight={500} size="sm">
+        <Text weight={500} size="sm" className="text-green-700">
           {node.position.label}
         </Text>
-        {node.children.length > 0 && (
-          <Badge
-            color={theme.colorScheme === "dark" ? "gray" : "teal"}
-            variant="filled"
-            size="sm"
-            className="ml-2"
-          >
-            {node.children.length}
-          </Badge>
-        )}
       </div>
-      {showEmployees && node.children.length === 0 && (
-        <div className="mt-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Render employees for this position */}
-          </div>
-        </div>
-      )}
       {node.children.map((child) => (
         <TreeNodeComponent
           key={child.position.value}
@@ -125,8 +109,8 @@ const TreeComponent = ({
   );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div className="col-span-full">
+    <div className="grid grid-cols-2 gap-4">
+      <div>
         <Card shadow="lg" className="p-4">
           {tree.map((node) => (
             <TreeNodeComponent
@@ -139,10 +123,10 @@ const TreeComponent = ({
         </Card>
       </div>
       {selectedPosition && (
-        <div className="col-span-full">
+        <div>
           <Card shadow="lg" className="p-4">
             <Text weight={700} size="lg" className="mb-4">
-              {positions.find((p) => p.value === selectedPosition)?.label} 
+              {positions.find((p) => p.value === selectedPosition)?.label}
             </Text>
             {positionEmployees.map((employee) => (
               <div key={employee.id} className="my-2">
@@ -168,6 +152,7 @@ const TreeComponent = ({
     </div>
   );
 };
+
 
 const App = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);

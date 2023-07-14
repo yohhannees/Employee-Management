@@ -3,8 +3,6 @@ import { EmployeeForm } from "./components/EmployeeForm";
 import { EmployeeList } from "./components/EmployeeList";
 import axios from "axios";
 import { Employee } from "./components/Employee";
-import { HeaderTabs } from "./components/HeaderTabs";
-import { NavbarSimple } from "./components/NavBarSimple";
 import TreeNodeComponent from "./components/TreeNodeComponent";
 
 
@@ -33,7 +31,7 @@ const App: React.FC = () => {
         <div className="grid grid-cols-2 gap-8">
           <EmployeeForm onSubmit={handleCreateOrUpdateEmployee} />
           <EmployeeList />
-          <TreeNodeComponent />
+          <TreeNodeComponent />        
         </div>
       </div>
     </>
