@@ -1,0 +1,165 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {positions} from "./PositionLabel";
+
+// Define the interface for the position object
+interface Position {
+  label: string;
+  value: string;
+  parentId: number | null;
+}
+
+// Define the interface for the employee object
+interface Employee {
+  id: number;
+  name: string;
+  position: string;
+  parentId: number | null;
+}
+
+// Define the interface for the tree node object
+interface TreeNode {
+  position: Position;
+  children: TreeNode[];
+}
+
+// Define a function to convert an array of positions to a tree structure
+const arrayToTree = (positions: Position[]): TreeNode[] => {
+  // Create a map of positions by their value
+  const positionMap = new Map<string, Position>();
+  positions.forEach((position) => {
+    positionMap.set(position.value, position);
+  });
+
+  // Create a map of tree nodes by their value
+  const nodeMap = new Map<string, TreeNode>();
+  positions.forEach((position) => {
+    nodeMap.set(position.value, {
+      position,
+      children: [],
+    });
+  });
+
+  // Create an array of root nodes
+  const roots: TreeNode[] = [];
+
+  // Iterate over the positions and assign them to their parent nodes or roots
+  positions.forEach((position) => {
+    if (position.parentId === null) {
+      // This is a root node
+      roots.push(nodeMap.get(position.value)!);
+    } else {
+      // This is a child node
+      const parentPosition = positionMap.get(
+        positions[position.parentId - 1].value
+      )!;
+      const parentNode = nodeMap.get(parentPosition.value)!;
+      parentNode.children.push(nodeMap.get(position.value)!);
+    }
+  });
+
+  return roots;
+};
+
+// Define a component to render a single tree node
+interface Props {
+  node: TreeNode;
+  employees: Employee[];
+}
+
+const TreeNodeComponent = ({ node, employees }: Props) => {
+  const [showEmployees, setShowEmployees] = useState(false);
+
+  const handleClick = () => {
+    setShowEmployees(!showEmployees);
+  };
+
+  const positionEmployees = employees.filter(
+    (employee) => employee.position === node.position.value
+  );
+
+  return (
+    <div className="ml-4">
+      <div className="flex items-center cursor-pointer" onClick={handleClick}>
+        <div className="font-bold">{node.position.label}</div>
+        {positionEmployees.length > 0 && (
+          <div className="ml-2 text-sm text-gray-500">
+            ({positionEmployees.length} employee
+            {positionEmployees.length > 1 ? "s" : ""})
+          </div>
+        )}
+      </div>
+      {showEmployees && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {positionEmployees.map((employee) => (
+            <div
+              key={employee.id}
+              className="p-2 bg-white shadow-lg rounded-lg"
+            >
+              <div>Name: {employee.name}</div>
+              <div>ID: {employee.id}</div>
+              <div>Position: {employee.position}</div>
+              <div>Parent ID: {employee.parentId}</div>
+            </div>
+          ))}
+        </div>
+      )}
+      {node.children.length > 0 && (
+        <div className="mt-2">
+          {node.children.map((child) => (
+            <TreeNodeComponent
+              key={child.position.value}
+              node={child}
+              employees={employees}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Define a component to render the whole tree
+const TreeComponent = ({
+  positions,
+  employees,
+}: {
+  positions: Position[];
+  employees: Employee[];
+}) => {
+  // Convert the positions array to a tree structure
+  const tree = arrayToTree(positions);
+
+  return (
+    <div className="p-4 bg-white shadow-lg rounded-lg">
+      {tree.map((node) => (
+        <TreeNodeComponent
+          key={node.position.value}
+          node={node}
+          employees={employees}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Define the main component that fetches the data and renders the tree component
+const App = () => {
+  // Define the state for the employees array
+  const [employees, setEmployees] = useState<Employee[]>([]);
+
+  // Fetch the data for employees from the API when the component mounts
+  useEffect(() => {
+    axios.get("http://localhost:5000/employees").then((response) => {
+      setEmployees(response.data);
+    });
+  }, []);
+
+  return (
+    <div className="container mx-auto my-4">
+      <TreeComponent positions={positions} employees={employees} />
+    </div>
+  );
+};
+
+export default App;

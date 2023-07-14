@@ -1,0 +1,124 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John",
+      "position": "CEO",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "name": "Mike",
+      "position": "CTO",
+      "parentId": 1
+    },
+    {
+      "id": 3,
+      "name": "Jane",
+      "position": "Project Manager",
+      "parentId": 2
+    },
+    {
+      "id": 4,
+      "name": "Bob",
+      "position": "Product Owner",
+      "parentId": 2
+    },
+    {
+      "id": 5,
+      "name": "Tom",
+      "position": "Tech Lead",
+      "parentId": 4
+    },
+    {
+      "id": 6,
+      "name": "Alice",
+      "position": "Frontend Developer",
+      "parentId": 5
+    },
+    {
+      "id": 7,
+      "name": "David",
+      "position": "Backend Developer",
+      "parentId": 5
+    },
+    {
+      "id": 8,
+      "name": "Peter",
+      "position": "DevOps Engineer",
+      "parentId": 5
+    },
+    {
+      "id": 9,
+      "name": "Sarah",
+      "position": "QA Engineer",
+      "parentId": 4
+    },
+    {
+      "id": 10,
+      "name": "Karen",
+      "position": "Scrum Master",
+      "parentId": 4
+    },
+    {
+      "id": 11,
+      "name": "Jack",
+      "position": "CFO",
+      "parentId": 1
+    },
+    {
+      "id": 12,
+      "name": "Lisa",
+      "position": "Chef Accountant",
+      "parentId": 11
+    },
+    {
+      "id": 13,
+      "name": "Mike",
+      "position": "Financial Analyst",
+      "parentId": 12
+    },
+    {
+      "id": 14,
+      "name": "Mark",
+      "position": "Account and Payable",
+      "parentId": 12
+    },
+    {
+      "id": 15,
+      "name": "Kate",
+      "position": "Internal Audit",
+      "parentId": 11
+    },
+    {
+      "id": 16,
+      "name": "Tom",
+      "position": "COO",
+      "parentId": 1
+    },
+    {
+      "id": 17,
+      "name": "Mary",
+      "position": "Product Manager",
+      "parentId": 16
+    },
+    {
+      "id": 18,
+      "name": "Adam",
+      "position": "Operation Manager",
+      "parentId": 16
+    },
+    {
+      "id": 19,
+      "name": "Lucy",
+      "position": "Customer Relation",
+      "parentId": 16
+    },
+    {
+      "id": 20,
+      "name": "Peter",
+      "position": "HR",
+      "parentId": 1
+    }
+  ]
+}
