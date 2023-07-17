@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Text, Badge, useMantineTheme, Button } from "@mantine/core";
+import { Card, Text, } from "@mantine/core";
 
 import { positions } from "./PositionLabel";
 
@@ -60,7 +59,6 @@ interface Props {
 
 const TreeNodeComponent = ({ node, depth, onPositionClick }: Props) => {
   const [showEmployees, setShowEmployees] = useState(false);
-  const theme = useMantineTheme();
 
   const handleClick = () => {
     setShowEmployees(!showEmployees);
@@ -74,7 +72,7 @@ const TreeNodeComponent = ({ node, depth, onPositionClick }: Props) => {
         onClick={handleClick}
         style={{ paddingLeft: `${depth * 1.5}rem` }}
       >
-        <Text weight={500} size="sm" className="text-green-700">
+        <Text weight={600}  size="sm" className="text-green-500">
           {node.position.label}
         </Text>
       </div>
@@ -133,13 +131,13 @@ const TreeComponent = ({
                 <Card shadow="sm">
                   <div className="p-4">
                     <Text weight={500}>{employee.name}</Text>
-                    <Text size="xs" color="gray">
+                    <Text size="xs" color="green" weight="bold">
                       ID: {employee.id}
                     </Text>
-                    <Text size="xs" color="gray">
+                    <Text size="xs" color="green" weight="bold">
                       Position: {employee.position}
                     </Text>
-                    <Text size="xs" color="gray">
+                    <Text size="xs" color="green" weight="bold">
                       Parent ID: {employee.parentId}
                     </Text>
                   </div>
@@ -152,7 +150,6 @@ const TreeComponent = ({
     </div>
   );
 };
-
 
 const App = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -167,7 +164,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <div className="p-4 my-16">
       <Text weight={700} size="lg" className="mb-4">
         Company Hierarchy
       </Text>

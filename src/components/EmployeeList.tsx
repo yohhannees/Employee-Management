@@ -25,10 +25,6 @@ interface Employee {
   parentId: number | null;
 }
 
-const jobColors: Record<string, string> = {
-  CEO: "red",
-};
-
 export const EmployeeList: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
@@ -108,7 +104,6 @@ export const EmployeeList: React.FC = () => {
       </td>
       <td>
         <Badge
-          color={jobColors[employee.position.toLowerCase()]}
           variant={theme.colorScheme === "dark" ? "light" : "outline"}
         >
           {employee.position}

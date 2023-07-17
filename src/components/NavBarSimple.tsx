@@ -8,16 +8,16 @@ import {
   rem,
 } from "@mantine/core";
 import {
-  IconBellRinging,
-  IconFingerprint,
-  IconKey,
-  IconSettings,
-  Icon2fa,
-  IconDatabaseImport,
-  IconReceipt2,
   IconSwitchHorizontal,
   IconLogout,
+  IconEdit,
+  IconError404,
+  IconHierarchy3,
+  IconListDetails,
+
 } from "@tabler/icons-react";
+import logo from "../assets/perago.png";
+
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -89,13 +89,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: "", label: "Notifications", icon: IconBellRinging },
-  { link: "", label: "Billing", icon: IconReceipt2 },
-  { link: "", label: "Security", icon: IconFingerprint },
-  { link: "", label: "SSH Keys", icon: IconKey },
-  { link: "", label: "Databases", icon: IconDatabaseImport },
-  { link: "", label: "Authentication", icon: Icon2fa },
-  { link: "", label: "Other Settings", icon: IconSettings },
+  { link: "/", label: "Registration Format", icon: IconEdit },
+  { link: "/", label: "Company Hierarchy", icon: IconHierarchy3 },
+  { link: "/list", label: "Employee List", icon: IconListDetails },
+  { link: "/error", label: "404", icon: IconError404 },
 ];
 
 export function NavbarSimple() {
@@ -109,8 +106,7 @@ export function NavbarSimple() {
       })}
       href={item.link}
       key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
+      onClick={() => {
         setActive(item.label);
       }}
     >
@@ -120,27 +116,29 @@ export function NavbarSimple() {
   ));
 
   return (
-    <Navbar height={700} width={{ sm: 200 }} p="md"  className="fixed left-0">
+    <Navbar height={700} width={{ sm: 200 }} p="md" className="fixed left-0">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
-          <div>Logo</div>
-          <Code sx={{ fontWeight: 700 }}> Perago</Code>
+          <div>
+            <img src={logo} alt="logo" width="50" height="50" />
+          </div>
+          <Code sx={{ fontWeight: 700 }}> Yohannes</Code>
         </Group>
         {links}
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
         <a
-          href="#"
+          href="/list"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >
           <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
+          <span> Account</span>
         </a>
 
         <a
-          href="#"
+          href="/list"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >

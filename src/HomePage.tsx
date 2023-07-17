@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { EmployeeForm } from "./components/EmployeeForm";
-import { EmployeeList } from "./components/EmployeeList";
 import axios from "axios";
 import { Employee } from "./components/Employee";
 import TreeNodeComponent from "./components/TreeNodeComponent";
 import { NavbarSimple } from "./components/NavBarSimple";
 import HeaderNav from "./components/HeaderNav";
-const App: React.FC = () => {
+const HomePage: React.FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null
   );
@@ -38,10 +37,9 @@ const App: React.FC = () => {
             <TreeNodeComponent />
           </div>
         </div>
-        
       </div>
     </>
   );
 };
 
-export default App;
+export default HomePage;
