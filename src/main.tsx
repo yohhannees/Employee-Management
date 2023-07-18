@@ -7,6 +7,7 @@ import HomePage from "./HomePage.tsx";
 import ListPageLayout from "./components/ListPageLayout.tsx";
 import { MantineProvider } from "@mantine/core";
 import { ThemeContext } from "./theme/ThemeContext.tsx";
+import App from "./components/App.tsx"
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const Main = () => {
           <RouterProvider router={router} />
         </MantineProvider>
       </ThemeContext.Provider>
+      
     </React.StrictMode>
   );
 };

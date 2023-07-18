@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Text, } from "@mantine/core";
+import { Card, Text } from "@mantine/core";
 
 import { positions } from "./PositionLabel";
 
@@ -72,7 +72,11 @@ const TreeNodeComponent = ({ node, depth, onPositionClick }: Props) => {
         onClick={handleClick}
         style={{ paddingLeft: `${depth * 1.5}rem` }}
       >
-        <Text weight={600}  size="sm" className="text-green-500">
+        <Text
+          weight={600}
+          size="sm"
+          className={"text-green-500 hover:border active:text-black border-green-700 "}
+        >
           {node.position.label}
         </Text>
       </div>
