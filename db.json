@@ -227,6 +227,12 @@
       "position": "CEO",
       "parentId": null,
       "id": 22
+    },
+    {
+      "name": "Yohannes Getachew",
+      "position": "Project Manager",
+      "parentId": 2,
+      "id": 23
     }
   ]
 }
