@@ -1,20 +1,29 @@
 import { useForm } from "react-hook-form";
 import { Employee } from "./Employee";
 import axios from "axios";
-import { positions } from "./PositionLabel";
-
+import { useState, useEffect } from "react";
 
 interface EmployeeFormProps {
   onSubmit: (data: Employee) => void;
 }
-
-
+interface Position {
+  value: string;
+  label: string;
+  parentId: number;
+}
 export const EmployeeForm = ({ onSubmit }: EmployeeFormProps) => {
   const { register, handleSubmit, setValue } = useForm<Employee>();
 
   const handleCreateOrUpdateEmployee = async (employee: Employee) => {
     await axios.post("http://localhost:5000/employees", employee);
   };
+
+  const [positions, setPositions] = useState<Position[]>([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/positions").then((response) => {
+      setPositions(response.data);
+    });
+  }, []);
 
   const handlePositionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedPosition = positions.find(
@@ -70,3 +79,5 @@ export const EmployeeForm = ({ onSubmit }: EmployeeFormProps) => {
     </div>
   );
 };
+
+export default EmployeeForm;

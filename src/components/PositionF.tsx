@@ -29,6 +29,7 @@ export const PositionF = ({ onSubmit }: PositionFormProps) => {
 
   return (
     <>
+      <h1 className="text-2xl font-bold ml-48 my-9 pb-0 mb-4">Add Employee</h1>
       <form
         className="space-y-4 ml-48 mt-4"
         onSubmit={handleSubmit((data: Position) => {
@@ -68,17 +69,6 @@ export const PositionF = ({ onSubmit }: PositionFormProps) => {
           Add Position
         </button>
       </form>
-      <div className="ml-48">
-        <h1>Positions</h1>
-        <ul>
-          {positions.map((position) => (
-            <li key={position.value}>
-              {position.label} ({position.value}) - Parent ID:{" "}
-              {position.parentId}
-            </li>
-          ))}
-        </ul>
-      </div>
     </>
   );
 };

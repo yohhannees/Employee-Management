@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Text } from "@mantine/core";
 
-import { positions } from "./PositionLabel";
 
 interface Position {
   label: string;
@@ -166,6 +165,14 @@ const App = () => {
     };
     fetchEmployees();
   }, []);
+
+   const [positions, setPositions] = useState<Position[]>([]);
+   useEffect(() => {
+     axios.get("http://localhost:5000/positions").then((response) => {
+       setPositions(response.data);
+     });
+   }, []);
+  
 
   return (
     <div className="p-4 my-16">

@@ -119,12 +119,6 @@
       "label": "HR",
       "value": "HR",
       "parentId": 1
-    },
-    {
-      "value": "new ",
-      "label": "new ",
-      "parentId": "4",
-      "id": 21
     }
   ],
   "employees": [
@@ -259,6 +253,12 @@
       "position": "Project Manager",
       "parentId": 2,
       "id": 23
+    },
+    {
+      "name": "yodahe",
+      "position": "CTO",
+      "parentId": 1,
+      "id": 24
     }
   ]
 }
