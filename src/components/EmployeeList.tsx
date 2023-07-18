@@ -16,7 +16,7 @@ import {
 import { IconPencil, IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { Select } from "@mantine/core";
-import { positions } from "./PositionLabel";
+
 
 interface Employee {
   id: number;
@@ -184,15 +184,32 @@ interface EmployeeEditFormProps {
   onCancel: () => void;
 }
 
+
+interface Position {
+  label: string;
+  value: string;
+  parentId: number | null;
+}
 const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
   employee,
   onUpdate,
   onCancel,
 }) => {
+
+
+    const [positions, setPositions] = useState<Position[]>([]);
+    useEffect(() => {
+      axios.get("http://localhost:5000/positions").then((response) => {
+        setPositions(response.data);
+      });
+    }, []);
+
   const [name, setName] = useState(employee.name);
   const [position, setPosition] = useState(employee.position);
   const selectedPosition = positions.find((p) => p.value === position);
   const parentId = selectedPosition?.parentId ?? employee.parentId;
+
+
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -202,7 +219,7 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Group direction="column" spacing="xs">
+      <Group direction ="column" spacing="xs">
         <TextInput
           label="Name"
           required

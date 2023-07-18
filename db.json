@@ -244,21 +244,9 @@
     },
     {
       "name": "Yohannes Getachew",
-      "position": "CEO",
-      "parentId": null,
-      "id": 22
-    },
-    {
-      "name": "Yohannes Getachew",
-      "position": "Project Manager",
-      "parentId": 2,
-      "id": 23
-    },
-    {
-      "name": "yodahe",
       "position": "CTO",
       "parentId": 1,
-      "id": 24
+      "id": 22
     }
   ]
 }
