@@ -11,25 +11,30 @@ interface Position {
 interface PositionFormProps {
   onSubmit: (data: Position) => void;
 }
+
 export const PositionF = ({ onSubmit }: PositionFormProps) => {
   const { register, handleSubmit } = useForm<Position>();
 
   const handleCreateOrUpdatePosition = async (position: Position) => {
-    await axios.post("http://localhost:5000/positions", position);
+    const { label: value, parentId } = position;
+    await axios.post("http://localhost:5000/positions", { value, label: value, parentId });
   };
 
-   const [positions, setPositions] = useState<Position[]>([]);
-    useEffect(() => {
-      axios.get("http://localhost:5000/positions").then((response) => {
-        setPositions(response.data);
-      });
-    }, []);
+  const [positions, setPositions] = useState<Position[]>([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/positions").then((response) => {
+      setPositions(response.data);
+    });
+  }, []);
 
   return (
     <>
       <form
         className="space-y-4 ml-48 mt-4"
-        onSubmit={handleSubmit(onSubmit || handleCreateOrUpdatePosition)}
+        onSubmit={handleSubmit((data: Position) => {
+          const { label: value, parentId } = data;
+          onSubmit({ value, label: value, parentId });
+        })}
       >
         <div>
           <label htmlFor="name" className="block mb-1">

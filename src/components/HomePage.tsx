@@ -30,6 +30,9 @@ const HomePage: React.FC = () => {
     }
     setSelectedEmployee(null);
   };
+ const handleCreateOrUpdatePosition = async (position: Position) => {
+   await axios.post("http://localhost:5000/positions", position);
+ };
 
   return (
     <>
@@ -41,8 +44,10 @@ const HomePage: React.FC = () => {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <EmployeeForm onSubmit={handleCreateOrUpdateEmployee} />
+            <PositionF onSubmit={handleCreateOrUpdatePosition}/>
             <div className="ml-64">
-              <PositionForm />
+              
+              
             </div>
           </div>
           <div>
