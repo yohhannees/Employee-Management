@@ -7,12 +7,14 @@ import HomePage from "./components/HomePage.tsx";
 import ListPageLayout from "./components/ListPageLayout.tsx";
 import { MantineProvider } from "@mantine/core";
 import { ThemeContext } from "./theme/ThemeContext.tsx";
+import Authentication from "./components/Authentication.tsx";
+import { AuthenticationForm } from "./components/AuthenticationForm.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,      
   },
   {
     path: "/list",
@@ -45,6 +47,8 @@ const Main = () => {
           <RouterProvider router={router} />
         </MantineProvider>
       </ThemeContext.Provider>
+      {/* <Authentication/> */}
+      {/* <AuthenticationForm/> */}
     </React.StrictMode>
   );
 };

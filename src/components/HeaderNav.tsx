@@ -1,9 +1,7 @@
 import {
   createStyles,
   Box,
-  Button,
   Text,
-  Badge,
   Avatar,
   Group,
   Switch,
