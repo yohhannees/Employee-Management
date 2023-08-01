@@ -14,7 +14,8 @@ import {
   IconError404,
   IconHierarchy3,
   IconListDetails,
-
+  IconLayoutList,
+  IconTrash,
 } from "@tabler/icons-react";
 import logo from "../assets/perago.png";
 
@@ -92,6 +93,9 @@ const data = [
   { link: "/", label: "Registration Format", icon: IconEdit },
   { link: "/", label: "Company Hierarchy", icon: IconHierarchy3 },
   { link: "/list", label: "Employee List", icon: IconListDetails },
+  { link: "/Position", label: "Position List", icon: IconLayoutList },
+  { link: "/manage", label: "Deleted List", icon: IconTrash },
+  
   { link: "/error", label: "404", icon: IconError404 },
 ];
 

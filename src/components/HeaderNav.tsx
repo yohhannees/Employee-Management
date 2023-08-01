@@ -1,11 +1,4 @@
-import {
-  createStyles,
-  Box,
-  Text,
-  Avatar,
-  Group,
-  Switch,
-} from "@mantine/core";
+import { createStyles, Box, Text, Avatar, Group, Switch } from "@mantine/core";
 import { ThemeContext } from "../theme/ThemeContext";
 import { useContext } from "react";
 const useStyles = createStyles((theme) => ({
@@ -35,8 +28,6 @@ const HeaderNav = () => {
   const { classes } = useStyles();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  
-
   return (
     <Box component="header" className={classes.header}>
       <Group spacing="xs" className={classes.hiddenMobile}>
@@ -45,11 +36,7 @@ const HeaderNav = () => {
           onChange={toggleTheme}
           label={theme === "dark" ? "Dark mode" : "Light mode"}
         />
-        <Avatar src="profile-image.jpg" alt="Profile" radius="xl" />
       </Group>
-      <Text weight={700} size="lg" style={{ marginLeft: 4 }}>
-        My Website
-      </Text>
     </Box>
   );
 };

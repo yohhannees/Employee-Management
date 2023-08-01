@@ -1,10 +1,10 @@
 {
   "positions": [
     {
-      "id": 1,
       "label": "CEO",
       "value": "CEO",
-      "parentId": null
+      "parentId": null,
+      "id": 1
     },
     {
       "id": 2,
@@ -119,12 +119,6 @@
       "label": "HR",
       "value": "HR",
       "parentId": 1
-    },
-    {
-      "value": "hjgfcdsfgh",
-      "label": "hjgfcdsfgh",
-      "parentId": "5",
-      "id": 21
     }
   ],
   "employees": [

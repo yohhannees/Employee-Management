@@ -1,1 +1,0 @@
-export type AuthAction = { type: "LOGIN" } | { type: "REGISTER" };

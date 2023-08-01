@@ -60,6 +60,12 @@ export const PositionF = ({ onSubmit }: PositionFormProps) => {
             <option value="5">Tech Lead</option>
             <option value="4">Product Owner</option>
             <option value="16">COO</option>
+             {/* <option value="">-- Select a position --</option>
+            {positions.map((position) => (
+              <option key={position.value} value={position.value}>
+                {position.label}
+              </option>
+            ))} */}
           </select>
         </div>
         <button

@@ -7,20 +7,41 @@ import HomePage from "./components/HomePage.tsx";
 import ListPageLayout from "./components/ListPageLayout.tsx";
 import { MantineProvider } from "@mantine/core";
 import { ThemeContext } from "./theme/ThemeContext.tsx";
-import Authentication from "./components/Authentication.tsx";
-import { AuthenticationForm } from "./components/AuthenticationForm.tsx";
+import PositionPageLayout from "./components/PositionPageLayout.tsx";
+import ManagePageLayout from "./components/ManagePageLayout.tsx";
+import LoginRegister from "./auth/LoginRegister.tsx";
+
+  
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    errorElement: <ErrorPage />,      
+    errorElement: <ErrorPage />,
   },
   {
     path: "/list",
     element: <ListPageLayout />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Position",
+    element: <PositionPageLayout />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/manage",
+    element: <ManagePageLayout />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginRegister/>,
+    errorElement: <ErrorPage />,
   },
 ]);
+
+
 
 const Main = () => {
   const [theme, setTheme] = useState(() => {
@@ -35,20 +56,20 @@ const Main = () => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
-
+  
+  
   return (
     <React.StrictMode>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <MantineProvider
-          theme={{ colorScheme: theme }}
+          theme={{ colorScheme:theme }}
           withGlobalStyles
           withNormalizeCSS
         >
-          <RouterProvider router={router} />
+           <RouterProvider router={router} /> 
         </MantineProvider>
       </ThemeContext.Provider>
-      {/* <Authentication/> */}
-      {/* <AuthenticationForm/> */}
+   
     </React.StrictMode>
   );
 };

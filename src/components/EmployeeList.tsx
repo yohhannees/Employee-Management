@@ -32,7 +32,7 @@ export const EmployeeList: React.FC = () => {
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(5);
+  const [employeesPerPage] = useState(8);
   const [isEditMode, setIsEditMode] = useState(false);
   const theme = useMantineTheme();
 
@@ -219,7 +219,7 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Group direction ="column" spacing="xs">
+      <Group  spacing="xs">
         <TextInput
           label="Name"
           required
@@ -243,16 +243,13 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
           value={parentId?.toString() ?? ""}
           onChange={(event) => setParentId(Number(event.currentTarget.value))}
         />
-      </Group>
-
-      <Group position="center" style={{ marginTop: "0.5rem" }}>
         <Button type="submit" className="bg-green-700 active:bg-green-950">
           Update
         </Button>
         <Button
           type="button"
           onClick={onCancel}
-          className=" bg-red-700 active:bg-red-950"
+          className=" bg-red-700 active:bg-red-950 "
         >
           Cancel
         </Button>
