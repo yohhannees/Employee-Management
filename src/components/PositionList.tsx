@@ -101,7 +101,9 @@ export function PositionList() {
   const handleEditSubmit = (position: Position) => {
     // Check if the edited position is the CEO (parentId is null), which is not allowed to change
     if (position.parentId === null) {
-      window.alert("Cannot edit the root position (CEO).");
+      window.alert(
+        "Cannot edit the root position (CEO) or add another root position ."
+      );
       return;
     }
 
@@ -133,6 +135,7 @@ export function PositionList() {
           )
         );
         setEditPosition(null);
+        window.alert(`Successfully updated  "{${position.label}}"`);
       });
   };
 
@@ -145,6 +148,7 @@ export function PositionList() {
       if (currentPage > totalPages) {
         setCurrentPage(totalPages);
       }
+      window.alert(`Successfully Deleted The Position`);
     });
   };
 

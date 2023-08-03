@@ -13,10 +13,10 @@
       "parentId": 1
     },
     {
-      "id": 3,
       "label": "Project Manager",
       "value": "Project Manager",
-      "parentId": 2
+      "parentId": 1,
+      "id": 3
     },
     {
       "label": "Product Owner",
