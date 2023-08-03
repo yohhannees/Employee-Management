@@ -10,6 +10,7 @@ import { ThemeContext } from "./theme/ThemeContext.tsx";
 import PositionPageLayout from "./components/PositionPageLayout.tsx";
 import ManagePageLayout from "./components/ManagePageLayout.tsx";
 import LoginRegister from "./auth/LoginRegister.tsx";
+import OrgChartComponent from "./components/OrgChartComponent.tsx";
 
   
 
@@ -36,7 +37,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginRegister/>,
+    element: <LoginRegister />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/chart",
+    element: <OrgChartComponent/>,
     errorElement: <ErrorPage />,
   },
 ]);
@@ -69,6 +75,7 @@ const Main = () => {
            <RouterProvider router={router} /> 
         </MantineProvider>
       </ThemeContext.Provider>
+    
    
     </React.StrictMode>
   );

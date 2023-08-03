@@ -91,7 +91,7 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
   { link: "/", label: "Registration Format", icon: IconEdit },
-  { link: "/", label: "Company Hierarchy", icon: IconHierarchy3 },
+  { link: "/chart", label: "Company Hierarchy", icon: IconHierarchy3 },
   { link: "/list", label: "Employee List", icon: IconListDetails },
   { link: "/Position", label: "Position List", icon: IconLayoutList },
   { link: "/manage", label: "Deleted List", icon: IconTrash },

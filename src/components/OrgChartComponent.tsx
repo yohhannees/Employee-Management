@@ -1,45 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import OrgChart from "@balkangraph/orgchart.js";
 import axios from "axios";
-import  OrgChart from "react-organizational-chart";
-import {  TreeNode } from "react-organizational-chart";
-
-interface Position {
-  id: number;
-  label: string;
-  value: string;
-  parentId: number | null;
-}
 
 const OrgChartComponent: React.FC = () => {
-  const [positions, setPositions] = useState<Position[]>([]);
-
   useEffect(() => {
-    axios.get("http://localhost:5000/positions").then((response) => {
-      setPositions(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/positions");
+        const data = response.data;
+
+        if (data && data.length > 0) {
+          // Map parentId to pid for org chart structure
+          const processedData = data.map((item: { parentId: any; }) => {
+            return {
+              ...item,
+              pid: item.parentId,
+            };
+          });
+
+          const orgChartContainer = document.getElementById("orgChart");
+          if (orgChartContainer) {
+            new OrgChart(orgChartContainer, {
+              nodes: processedData,
+             
+              nodeMenu: {
+                details: { text: "Details" },
+              },
+              nodeBinding: {
+                field_0: "name",
+                field_1: "title",
+                img_0: "img",
+              },
+
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const renderTree = (parentId: number | null) => {
-    return
-    <>
-    positions
-
-      .filter((position) => position.parentId === parentId)
-      .map((position) => (
-        <TreeNode label={position.label} key={position.id}>
-          {renderTree(position.id)}
-        </TreeNode>
-        <OrgChart></OrgChart>
-        </>
-      ));
-
-  };
-
-  return (
-   <div>
-     <Org]Chart/>
-   </div>
- );
+  return <div id="orgChart" style={{ width: "100%", height: "100%" }} />;
 };
 
 export default OrgChartComponent;

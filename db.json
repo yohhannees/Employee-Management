@@ -241,6 +241,78 @@
       "name": "Peter",
       "position": "HR",
       "parentId": 1
+    },
+    {
+      "name": "Yohannes",
+      "position": "CEO",
+      "parentId": null,
+      "id": 21
+    },
+    {
+      "name": "Yohannes",
+      "position": "CEO",
+      "parentId": null,
+      "id": 22
+    },
+    {
+      "name": "admin",
+      "position": "CTO",
+      "parentId": 1,
+      "id": 23
+    },
+    {
+      "name": "admin",
+      "position": "CTO",
+      "parentId": 1,
+      "id": 24
+    },
+    {
+      "name": "Yohannes",
+      "position": "Product Owner",
+      "parentId": 2,
+      "id": 25
+    },
+    {
+      "name": "Yohannes",
+      "position": "Product Owner",
+      "parentId": 2,
+      "id": 26
+    },
+    {
+      "name": "Yohannes",
+      "position": "Tech Lead",
+      "parentId": 4,
+      "id": 27
+    },
+    {
+      "name": "Yohannes",
+      "position": "Frontend Developer",
+      "parentId": 5,
+      "id": 28
+    },
+    {
+      "name": "Yohannes",
+      "position": "Frontend Developer",
+      "parentId": 5,
+      "id": 29
+    },
+    {
+      "name": "Yohannes Getachew",
+      "position": "DevOps Engineer",
+      "parentId": 5,
+      "id": 30
+    },
+    {
+      "name": "admin",
+      "position": "DevOps Engineer",
+      "parentId": 5,
+      "id": 31
+    },
+    {
+      "name": "Yohannes",
+      "position": "Customer Relation",
+      "parentId": 16,
+      "id": 32
     }
   ]
 }

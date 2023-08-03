@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { EmployeeForm } from "./EmployeeForm";
 import axios from "axios";
 import { Employee } from "./Employee";
@@ -7,7 +6,6 @@ import { NavbarSimple } from "./NavBarSimple";
 import HeaderNav from "./HeaderNav";
 import PositionF from "./PositionF";
 
-
 interface Position {
   value: string;
   label: string;
@@ -15,24 +13,23 @@ interface Position {
 }
 
 const HomePage: React.FC = () => {
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
-    null
-  );
 
-  const handleCreateOrUpdateEmployee = async (employee: Employee) => {
-    if (selectedEmployee) {
-      await axios.put(
-        `http://localhost:5000/employees/${selectedEmployee.id}`,
-        employee
-      );
-    } else {
-      await axios.post("http://localhost:5000/employees", employee);
-    }
-    setSelectedEmployee(null);
+   const handleCreateOrUpdateEmployee = async (employee: Employee) => {
+     await axios.post("http://localhost:5000/employees", employee);
+     window.alert(
+       `Successfully added position "${employee.name}" with parent position "${employee.position}"`
+     );
+   };
+
+  const handleCreateOrUpdatePosition = async (position: Position) => {
+    const { label: value, parentId } = position;
+    // Use parentId directly as the parent's id for the new position
+    await axios.post("http://localhost:5000/positions", {
+      value,
+      label: value,
+      parentId,
+    });
   };
- const handleCreateOrUpdatePosition = async (position: Position) => {
-   await axios.post("http://localhost:5000/positions", position);
- };
 
   return (
     <>
@@ -44,11 +41,8 @@ const HomePage: React.FC = () => {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <EmployeeForm onSubmit={handleCreateOrUpdateEmployee} />
-            <PositionF onSubmit={handleCreateOrUpdatePosition}/>
-            <div className="ml-64">
-              
-              
-            </div>
+            <PositionF onSubmit={handleCreateOrUpdatePosition} />
+            <div className="ml-64"></div>
           </div>
           <div>
             <TreeNodeComponent />

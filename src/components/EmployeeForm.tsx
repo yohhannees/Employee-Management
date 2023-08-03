@@ -16,6 +16,9 @@ export const EmployeeForm = ({ onSubmit }: EmployeeFormProps) => {
 
   const handleCreateOrUpdateEmployee = async (employee: Employee) => {
     await axios.post("http://localhost:5000/employees", employee);
+       window.alert(
+         `Successfully added position "${employee.name}" with parent position "${employee.position}"`
+       );
   };
 
   const [positions, setPositions] = useState<Position[]>([]);
