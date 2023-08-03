@@ -133,7 +133,7 @@ export function NavbarSimple() {
 
       <Navbar.Section className={classes.footer}>
         <a
-          href="/list"
+          href="/changeAccount"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >
@@ -142,7 +142,7 @@ export function NavbarSimple() {
         </a>
 
         <a
-          href="/list"
+          href="/logout"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >

@@ -17,7 +17,6 @@ import { IconPencil, IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { Select } from "@mantine/core";
 
-
 interface Employee {
   id: number;
   name: string;
@@ -50,6 +49,10 @@ export const EmployeeList: React.FC = () => {
       );
       setSelectedEmployee(null);
     });
+
+    window.alert(
+      `Successfully Deleted  "{${employee.name}}" from position "{${employee.position}}"`
+    );
   };
 
   const handleEditClick = (employee: Employee) => {
@@ -68,10 +71,13 @@ export const EmployeeList: React.FC = () => {
           prevEmployees.map((e) =>
             e.id === updatedEmployee.id ? updatedEmployee : e
           )
+          
         );
         setSelectedEmployee(null);
         setIsEditMode(false);
       });
+
+    window.alert(`Successfully Updated The Employee`);
   };
 
   const handleCancelClick = () => {
@@ -103,9 +109,7 @@ export const EmployeeList: React.FC = () => {
         </Group>
       </td>
       <td>
-        <Badge
-          variant={theme.colorScheme === "dark" ? "light" : "outline"}
-        >
+        <Badge variant={theme.colorScheme === "dark" ? "light" : "outline"}>
           {employee.position}
         </Badge>
       </td>
@@ -184,7 +188,6 @@ interface EmployeeEditFormProps {
   onCancel: () => void;
 }
 
-
 interface Position {
   label: string;
   value: string;
@@ -195,21 +198,17 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
   onUpdate,
   onCancel,
 }) => {
-
-
-    const [positions, setPositions] = useState<Position[]>([]);
-    useEffect(() => {
-      axios.get("http://localhost:5000/positions").then((response) => {
-        setPositions(response.data);
-      });
-    }, []);
+  const [positions, setPositions] = useState<Position[]>([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/positions").then((response) => {
+      setPositions(response.data);
+    });
+  }, []);
 
   const [name, setName] = useState(employee.name);
   const [position, setPosition] = useState(employee.position);
   const selectedPosition = positions.find((p) => p.value === position);
   const parentId = selectedPosition?.parentId ?? employee.parentId;
-
-
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -219,7 +218,7 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Group  spacing="xs">
+      <Group spacing="xs">
         <TextInput
           label="Name"
           required
