@@ -140,30 +140,6 @@ export function PositionList() {
   };
 
   const handleDelete = (id: number) => {
-    // Find the position to be deleted
-    const positionToDelete = positions.find((position) => position.id === id);
-
-    if (!positionToDelete) {
-      window.alert("Position not found.");
-      return;
-    }
-
-    // Recursive function to delete all child positions
-    const deleteChildPositions = (parentId: number | null) => {
-      const children = positions.filter(
-        (position) => position.parentId === parentId
-      );
-      for (const child of children) {
-        const childId = child.id;
-        deleteChildPositions(childId); // Recursively delete child positions
-        axios.delete(`http://localhost:5000/positions/${childId}`);
-      }
-    };
-
-    // Delete the children of the position to be deleted
-    deleteChildPositions(id);
-
-    // Delete the position
     axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
       setPositions((prevPositions) =>
         prevPositions.filter((position) => position.id !== id)

@@ -98,9 +98,7 @@ function EmployeesWithNoPosition() {
         setEmployees((prevEmployees) =>
           prevEmployees.filter((e) => e.id !== employee.id)
         );
-        window.alert(`Permanently Deleted Employee "${employee.name}"`);
       })
-
       .catch((error) => {
         console.error("Error deleting employee:", error);
       });
@@ -110,6 +108,7 @@ function EmployeesWithNoPosition() {
     setSelectedEmployee(null);
   };
 
+  
   return (
     <div>
       {selectedEmployee && (
@@ -211,9 +210,9 @@ function EmployeesWithNoPosition() {
               </td>
               <td>
                 <Group spacing={0} position="right">
-                  {/* <ActionIcon onClick={() => handleEditClick(employee)}>
+                  <ActionIcon onClick={() => handleEditClick(employee)}>
                     <IconPencil size="1rem" stroke={1.5} />
-                  </ActionIcon> */}
+                  </ActionIcon>
                   <ActionIcon
                     color="red"
                     onClick={() => handleDeleteClick(employee)}

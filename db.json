@@ -13,16 +13,16 @@
       "parentId": 1
     },
     {
+      "id": 3,
       "label": "Project Manager",
       "value": "Project Manager",
-      "parentId": 1,
-      "id": 3
+      "parentId": 2
     },
     {
+      "id": 4,
       "label": "Product Owner",
       "value": "Product Owner",
-      "parentId": 3,
-      "id": 4
+      "parentId": 2
     },
     {
       "id": 5,
@@ -91,34 +91,10 @@
       "parentId": 11
     },
     {
-      "id": 16,
-      "label": "COO",
-      "value": "COO",
-      "parentId": 1
-    },
-    {
-      "id": 17,
-      "label": "Product Manager",
-      "value": "Product Manager",
-      "parentId": 16
-    },
-    {
-      "id": 18,
-      "label": "Operation Manager",
-      "value": "Operation Manager",
-      "parentId": 16
-    },
-    {
-      "id": 19,
-      "label": "Customer Relation",
-      "value": "Customer Relation",
-      "parentId": 16
-    },
-    {
+      "id": 20,
       "label": "HR",
       "value": "HR",
-      "parentId": 19,
-      "id": 20
+      "parentId": 1
     }
   ],
   "employees": [
@@ -211,30 +187,6 @@
       "name": "Kate",
       "position": "Internal Audit",
       "parentId": 11
-    },
-    {
-      "id": 16,
-      "name": "Tom",
-      "position": "COO",
-      "parentId": 1
-    },
-    {
-      "id": 17,
-      "name": "Mary",
-      "position": "Product Manager",
-      "parentId": 16
-    },
-    {
-      "id": 18,
-      "name": "Adam",
-      "position": "Operation Manager",
-      "parentId": 16
-    },
-    {
-      "id": 19,
-      "name": "Lucy",
-      "position": "Customer Relation",
-      "parentId": 16
     },
     {
       "id": 20,

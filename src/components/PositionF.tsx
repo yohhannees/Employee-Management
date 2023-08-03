@@ -53,7 +53,7 @@ export const PositionF = ({ onSubmit }: PositionFormProps) => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold ml-48 my-9 pb-0 mb-4">Add Employee</h1>
+      <h1 className="text-2xl font-bold ml-48 my-9 pb-0 mb-4">Add Position</h1>
       <form
         className="space-y-4 ml-48 mt-4"
         onSubmit={handleSubmit(handleFormSubmit)}
