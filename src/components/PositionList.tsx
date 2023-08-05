@@ -148,20 +148,15 @@ export function PositionList() {
       return;
     }
 
-    // Recursive function to delete all child positions
-    const deleteChildPositions = (parentId: number | null) => {
-      const children = positions.filter(
-        (position) => position.parentId === parentId
-      );
-      for (const child of children) {
-        const childId = child.id;
-        deleteChildPositions(childId); // Recursively delete child positions
-        axios.delete(`http://localhost:5000/positions/${childId}`);
-      }
-    };
+    // Check if the position has children
+    const hasChildren = positions.some((position) => position.parentId === id);
 
-    // Delete the children of the position to be deleted
-    deleteChildPositions(id);
+    if (hasChildren) {
+      window.alert(
+        "The position has child positions. Please reassign or delete them first."
+      );
+      return;
+    }
 
     // Delete the position
     axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
@@ -175,6 +170,7 @@ export function PositionList() {
       window.alert(`Successfully Deleted The Position`);
     });
   };
+
 
   const getParentPosition = (parentId: number | null) => {
     return parentId

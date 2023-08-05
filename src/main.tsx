@@ -66,6 +66,7 @@ const Main = () => {
   
   return (
     <React.StrictMode>
+      
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <MantineProvider
           theme={{ colorScheme:theme }}

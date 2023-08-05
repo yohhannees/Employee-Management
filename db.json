@@ -25,10 +25,10 @@
       "parentId": 2
     },
     {
-      "id": 5,
       "label": "Tech Lead",
       "value": "Tech Lead",
-      "parentId": 4
+      "parentId": 11,
+      "id": 5
     },
     {
       "id": 6,
@@ -40,12 +40,6 @@
       "id": 7,
       "label": "Backend Developer",
       "value": "Backend Developer",
-      "parentId": 5
-    },
-    {
-      "id": 8,
-      "label": "DevOps Engineer",
-      "value": "DevOps Engineer",
       "parentId": 5
     },
     {
@@ -89,6 +83,24 @@
       "label": "Internal Audit",
       "value": "Internal Audit",
       "parentId": 11
+    },
+    {
+      "id": 16,
+      "label": "COO",
+      "value": "COO",
+      "parentId": 1
+    },
+    {
+      "id": 18,
+      "label": "Operation Manager",
+      "value": "Operation Manager",
+      "parentId": 16
+    },
+    {
+      "id": 19,
+      "label": "Customer Relation",
+      "value": "Customer Relation",
+      "parentId": 16
     },
     {
       "id": 20,
@@ -187,6 +199,30 @@
       "name": "Kate",
       "position": "Internal Audit",
       "parentId": 11
+    },
+    {
+      "id": 16,
+      "name": "Tom",
+      "position": "COO",
+      "parentId": 1
+    },
+    {
+      "id": 17,
+      "name": "Mary",
+      "position": "Product Manager",
+      "parentId": 16
+    },
+    {
+      "id": 18,
+      "name": "Adam",
+      "position": "Operation Manager",
+      "parentId": 16
+    },
+    {
+      "id": 19,
+      "name": "Lucy",
+      "position": "Customer Relation",
+      "parentId": 16
     },
     {
       "id": 20,

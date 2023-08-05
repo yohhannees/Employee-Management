@@ -20,7 +20,7 @@ interface Position {
   id: number;
   label: string;
   value: string;
-  parentId: number;
+  parentId: number | null; // Allow parentId to be null for the CEO position
 }
 
 interface EditFormProps {
@@ -55,22 +55,18 @@ function EditForm({ position, positions, onCancel, onSubmit }: EditFormProps) {
         <select
           className="block w-48 h-9 px-3 bg-gray-800 rounded-md text-gray-200 focus:outline-none"
           style={{ backgroundColor: "#25262B", padding: "0px 12px" }}
-          value={parentId}
-          onChange={(event) => setParentId(Number(event.target.value))}
+          value={parentId || ""}
+          onChange={(event) =>
+            setParentId(event.target.value ? Number(event.target.value) : null)
+          }
         >
-       
+          <option value="">None</option>
           {positions.map((position) => (
             <option key={position.id} value={position.id}>
               {position.label}
             </option>
           ))}
         </select>
-        <TextInput
-          type="number"
-          value={parentId?.toString() ?? ""}
-          onChange={(event) => setParentId(Number(event.currentTarget.value))}
-        />
-        
         <Button
           className="bg-green-700 active:bg-green-950"
           onClick={handleSubmit}
@@ -103,6 +99,29 @@ export function PositionList() {
   };
 
   const handleEditSubmit = (position: Position) => {
+    // Check if the edited position is the CEO (parentId is null), which is not allowed to change
+    if (position.parentId === null) {
+      window.alert(
+        "Cannot edit the root position (CEO) or add another root position ."
+      );
+      return;
+    }
+
+    // Check if the edited position's new parentId is not a child of the edited position
+    const isValidParent = (parentId: number) => {
+      let parent = positions.find((p) => p.id === parentId);
+      while (parent) {
+        if (parent.id === position.id) return false;
+        parent = positions.find((p) => p.id === parent.parentId);
+      }
+      return true;
+    };
+
+    if (!isValidParent(position.parentId)) {
+      window.alert("Cannot set the position under its own child.");
+      return;
+    }
+
     axios
       .put(`http://localhost:5000/positions/${position.id}`, {
         label: position.label,
@@ -116,10 +135,35 @@ export function PositionList() {
           )
         );
         setEditPosition(null);
+        window.alert(`Successfully updated  "{${position.label}}"`);
       });
   };
 
   const handleDelete = (id: number) => {
+    // Find the position to be deleted
+    const positionToDelete = positions.find((position) => position.id === id);
+
+    if (!positionToDelete) {
+      window.alert("Position not found.");
+      return;
+    }
+
+    // Recursive function to delete all child positions
+    const deleteChildPositions = (parentId: number | null) => {
+      const children = positions.filter(
+        (position) => position.parentId === parentId
+      );
+      for (const child of children) {
+        const childId = child.id;
+        deleteChildPositions(childId); // Recursively delete child positions
+        axios.delete(`http://localhost:5000/positions/${childId}`);
+      }
+    };
+
+    // Delete the children of the position to be deleted
+    deleteChildPositions(id);
+
+    // Delete the position
     axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
       setPositions((prevPositions) =>
         prevPositions.filter((position) => position.id !== id)
@@ -128,11 +172,14 @@ export function PositionList() {
       if (currentPage > totalPages) {
         setCurrentPage(totalPages);
       }
+      window.alert(`Successfully Deleted The Position`);
     });
   };
 
-  const getParentPosition = (parentId: number) => {
-    return positions.find((position) => position.id === parentId)?.label ?? "";
+  const getParentPosition = (parentId: number | null) => {
+    return parentId
+      ? positions.find((position) => position.id === parentId)?.label ?? ""
+      : "";
   };
 
   const filteredPositions = positions.filter((position) =>
@@ -183,7 +230,7 @@ export function PositionList() {
           <tr>
             <th>Label</th>
             <th>Parent</th>
-            <th>Parent ID </th>
+            <th>Parent ID</th>
             <th>Actions</th>
           </tr>
         </thead>

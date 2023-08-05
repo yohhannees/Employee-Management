@@ -101,7 +101,9 @@ export function PositionList() {
   const handleEditSubmit = (position: Position) => {
     // Check if the edited position is the CEO (parentId is null), which is not allowed to change
     if (position.parentId === null) {
-      window.alert("Cannot edit the root position (CEO).");
+      window.alert(
+        "Cannot edit the root position (CEO) or add another root position ."
+      );
       return;
     }
 
@@ -133,20 +135,40 @@ export function PositionList() {
           )
         );
         setEditPosition(null);
+        window.alert(`Successfully updated  "{${position.label}}"`);
       });
   };
 
   const handleDelete = (id: number) => {
-    axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
-      setPositions((prevPositions) =>
-        prevPositions.filter((position) => position.id !== id)
-      );
-      const totalPages = Math.ceil(filteredPositions.length / positionsPerPage);
-      if (currentPage > totalPages) {
-        setCurrentPage(totalPages);
-      }
-    });
-  };
+  // Find the position to be deleted
+  const positionToDelete = positions.find((position) => position.id === id);
+
+  if (!positionToDelete) {
+    window.alert("Position not found.");
+    return;
+  }
+
+  // Check if the position has children
+  const hasChildren = positions.some((position) => position.parentId === id);
+
+  if (hasChildren) {
+    window.alert("$ position has child positions. Please reassign or delete them first.");
+    return;
+  }
+
+  // Delete the position
+  axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
+    setPositions((prevPositions) =>
+      prevPositions.filter((position) => position.id !== id)
+    );
+    const totalPages = Math.ceil(filteredPositions.length / positionsPerPage);
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+    window.alert(`Successfully Deleted The Position`);
+  });
+};
+
 
   const getParentPosition = (parentId: number | null) => {
     return parentId

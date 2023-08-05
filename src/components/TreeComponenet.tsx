@@ -64,35 +64,30 @@ const TreeNodeComponent = ({ node, depth, onPositionClick }: Props) => {
   };
 
   return (
-    <div
-      className={
-        // Use Tailwind CSS to style the TreeNodeComponent
-        "flex flex-col items-center mb-4 shadow-md" +
-        " bg-"  +
-        " text-white"
-      }
-    >
+    <div>
       <div
-        className="bg-green-500 w-24 text-center rounded-full py-2 cursor-pointer"
+        className="flex items-center cursor-pointer"
         onClick={handleClick}
+        style={{ paddingLeft: `${depth * 1.5}rem` }}
       >
-        {node.position.label}
+        <Text
+          weight={600}
+          size="sm"
+          className={
+            "text-green-500 hover:border active:text-black border-green-700 "
+          }
+        >
+          {node.position.label}
+        </Text>
       </div>
-      <div className="flex">
-        {node.children.map((child) => (
-          <TreeNodeComponent
-            key={child.position.value}
-            node={child}
-            depth={depth + 1}
-            onPositionClick={onPositionClick}
-          />
-        ))}
-      </div>
-      {showEmployees && (
-        <Card>
-          <Text>Employees for position: {node.position.label}</Text>
-        </Card>
-      )}
+      {node.children.map((child) => (
+        <TreeNodeComponent
+          key={child.position.value}
+          node={child}
+          depth={depth + 1}
+          onPositionClick={onPositionClick}
+        />
+      ))}
     </div>
   );
 };
@@ -160,7 +155,7 @@ const TreeComponent = ({
   );
 };
 
-const Tree = () => {
+const App = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
@@ -190,4 +185,4 @@ const Tree = () => {
     </div>
   );
 };
-export default Tree;
+export default App;
