@@ -37,12 +37,6 @@
       "parentId": 5
     },
     {
-      "id": 7,
-      "label": "Backend Developer",
-      "value": "Backend Developer",
-      "parentId": 5
-    },
-    {
       "id": 9,
       "label": "QA Engineer",
       "value": "QA Engineer",
@@ -229,6 +223,12 @@
       "name": "Peter",
       "position": "HR",
       "parentId": 1
+    },
+    {
+      "name": "Yohannes Getachew",
+      "position": "CEO",
+      "parentId": null,
+      "id": 21
     }
   ]
 }

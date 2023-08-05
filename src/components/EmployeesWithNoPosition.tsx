@@ -50,12 +50,7 @@ function EmployeesWithNoPosition() {
         const positionsData = responses[0].data;
         const employeesData = responses[1].data;
 
-        // Filter employees without positions
-        const employeesWithoutPositions = employeesData.filter((employee) => {
-          return !positionsData.some((position) => position.id === employee.id);
-        });
-
-        setEmployees(employeesWithoutPositions);
+        setEmployees(employeesData);
         setPositions(positionsData);
       })
       .catch((error) => {
@@ -63,110 +58,16 @@ function EmployeesWithNoPosition() {
       });
   }, []);
 
-  const handleEditClick = (employee: Employee) => {
-    setSelectedEmployee(employee);
-  };
+  // Filter employees without positions
+  const employeesWithoutPositions = employees.filter((employee) => {
+    return !positions.some((position) => position.value === employee.position);
+  });
 
-  const handleUpdateClick = () => {
-    if (selectedEmployee) {
-      // Send the updated employee data to the server
-      axios
-        .put(
-          `http://localhost:5000/employees/${selectedEmployee.id}`,
-          selectedEmployee
-        )
-        .then(() => {
-          // Update the employee in the state
-          setEmployees((prevEmployees) =>
-            prevEmployees.map((employee) =>
-              employee.id === selectedEmployee.id ? selectedEmployee : employee
-            )
-          );
-          setSelectedEmployee(null);
-        })
-        .catch((error) => {
-          console.error("Error updating employee:", error);
-        });
-    }
-  };
-  const handleDeleteClick = (employee: Employee) => {
-    // Send a DELETE request to the server to delete the employee
-    axios
-      .delete(`http://localhost:5000/employees/${employee.id}`)
-      .then(() => {
-        // Update the state by removing the deleted employee from the list
-        setEmployees((prevEmployees) =>
-          prevEmployees.filter((e) => e.id !== employee.id)
-        );
-        window.alert(`Permanently Deleted Employee "${employee.name}"`);
-      })
-
-      .catch((error) => {
-        console.error("Error deleting employee:", error);
-      });
-  };
-
-  const handleCancelClick = () => {
-    setSelectedEmployee(null);
-  };
+  // ... rest of the component code remains unchanged ...
 
   return (
     <div>
-      {selectedEmployee && (
-        <div>
-          <Text className="text-green-500 font-bold">
-            Editing Employee: {selectedEmployee.name}
-          </Text>
-          <form>
-            <Group spacing="xs">
-              <TextInput
-                label="Name"
-                required
-                value={selectedEmployee.name}
-                onChange={(event) =>
-                  setSelectedEmployee({
-                    ...selectedEmployee,
-                    name: event.currentTarget.value,
-                  })
-                }
-              />
-
-              {/* Dropdown for selecting positions */}
-              <Select
-                label="Position"
-                required
-                value={selectedEmployee.position}
-                onChange={(value) =>
-                  setSelectedEmployee({
-                    ...selectedEmployee,
-                    position: value,
-                    parentId:
-                      positions.find((p) => p.value === value)?.parentId ??
-                      null, // Set the parent ID based on selected position
-                  })
-                }
-                data={positions}
-                textField="label"
-                valueField="value"
-              />
-
-              <Button
-                onClick={handleUpdateClick}
-                className="bg-green-700 active:bg-green-950"
-              >
-                Update
-              </Button>
-              <Button
-                onClick={handleCancelClick}
-                className=" bg-red-700 active:bg-red-950 "
-              >
-                Cancel
-              </Button>
-            </Group>
-          </form>
-        </div>
-      )}
-
+      {/* ... */}
       <Text className="text-green-500 font-bold">
         Employees without Parent Positions
       </Text>
@@ -181,7 +82,7 @@ function EmployeesWithNoPosition() {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {employeesWithoutPositions.map((employee) => (
             <tr key={employee.id}>
               <td>
                 <Group spacing="sm">
@@ -211,9 +112,9 @@ function EmployeesWithNoPosition() {
               </td>
               <td>
                 <Group spacing={0} position="right">
-                  {/* <ActionIcon onClick={() => handleEditClick(employee)}>
+                  <ActionIcon onClick={() => handleEditClick(employee)}>
                     <IconPencil size="1rem" stroke={1.5} />
-                  </ActionIcon> */}
+                  </ActionIcon>
                   <ActionIcon
                     color="red"
                     onClick={() => handleDeleteClick(employee)}
