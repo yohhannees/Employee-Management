@@ -11,6 +11,8 @@ import PositionPageLayout from "./components/PositionPageLayout.tsx";
 import ManagePageLayout from "./components/ManagePageLayout.tsx";
 import LoginRegister from "./auth/LoginRegister.tsx";
 import OrgChartComponent from "./components/OrgChartComponent.tsx";
+import chartLayout from "./components/chartLayout.tsx";
+import BackupLayout from "./components/BackupLayout.tsx";
 
   
 
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/chart",
-    element: <OrgChartComponent/>,
+    element: <BackupLayout/>,
     errorElement: <ErrorPage />,
   },
 ]);

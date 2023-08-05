@@ -25,15 +25,15 @@
       "parentId": 2
     },
     {
+      "id": 5,
       "label": "Tech Lead",
       "value": "Tech Lead",
-      "parentId": 11,
-      "id": 5
+      "parentId": 4
     },
     {
-      "id": 6,
-      "label": "Frontend Developer",
-      "value": "Frontend Developer",
+      "id": 8,
+      "label": "DevOps Engineer",
+      "value": "DevOps Engineer",
       "parentId": 5
     },
     {
@@ -83,18 +83,6 @@
       "label": "COO",
       "value": "COO",
       "parentId": 1
-    },
-    {
-      "id": 18,
-      "label": "Operation Manager",
-      "value": "Operation Manager",
-      "parentId": 16
-    },
-    {
-      "id": 19,
-      "label": "Customer Relation",
-      "value": "Customer Relation",
-      "parentId": 16
     },
     {
       "id": 20,
@@ -223,12 +211,18 @@
       "name": "Peter",
       "position": "HR",
       "parentId": 1
+    }
+  ],
+  "backup": [
+    {
+      "positions": [],
+      "employees": [],
+      "id": 1
     },
     {
-      "name": "Yohannes Getachew",
-      "position": "CEO",
-      "parentId": null,
-      "id": 21
+      "positions": [],
+      "employees": [],
+      "id": 2
     }
   ]
 }
