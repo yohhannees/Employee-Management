@@ -175,30 +175,6 @@
       "name": "Tom",
       "position": "COO",
       "parentId": 1
-    },
-    {
-      "id": 17,
-      "name": "Mary",
-      "position": "Product Manager",
-      "parentId": 16
-    },
-    {
-      "id": 18,
-      "name": "Adam",
-      "position": "Operation Manager",
-      "parentId": 16
-    },
-    {
-      "id": 19,
-      "name": "Lucy",
-      "position": "Customer Relation",
-      "parentId": 16
-    },
-    {
-      "id": 20,
-      "name": "Peter",
-      "position": "HR",
-      "parentId": 1
     }
   ],
   "backup": [
@@ -1813,30 +1789,6 @@
           "id": 16,
           "name": "Tom",
           "position": "COO",
-          "parentId": 1
-        },
-        {
-          "id": 17,
-          "name": "Mary",
-          "position": "Product Manager",
-          "parentId": 16
-        },
-        {
-          "id": 18,
-          "name": "Adam",
-          "position": "Operation Manager",
-          "parentId": 16
-        },
-        {
-          "id": 19,
-          "name": "Lucy",
-          "position": "Customer Relation",
-          "parentId": 16
-        },
-        {
-          "id": 20,
-          "name": "Peter",
-          "position": "HR",
           "parentId": 1
         }
       ],

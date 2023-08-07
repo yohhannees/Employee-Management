@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  Avatar,
-  Badge,
   Table,
   Group,
-  Text,
   ActionIcon,
-  Anchor,
   ScrollArea,
   useMantineTheme,
   Button,
@@ -88,6 +84,9 @@ export function PositionList() {
   const [searchTerm, setSearchTerm] = useState("");
   const theme = useMantineTheme();
 
+  const [recentlyDeletedPosition, setRecentlyDeletedPosition] =
+    useState<Position | null>(null);
+
   useEffect(() => {
     axios.get("http://localhost:5000/positions").then((response) => {
       setPositions(response.data);
@@ -160,6 +159,7 @@ export function PositionList() {
 
     // Delete the position
     axios.delete(`http://localhost:5000/positions/${id}`).then(() => {
+      setRecentlyDeletedPosition(positionToDelete);
       setPositions((prevPositions) =>
         prevPositions.filter((position) => position.id !== id)
       );
@@ -167,10 +167,31 @@ export function PositionList() {
       if (currentPage > totalPages) {
         setCurrentPage(totalPages);
       }
+      showUndoButton();
       window.alert(`Successfully Deleted The Position`);
     });
   };
 
+  const showUndoButton = () => {
+    setTimeout(() => {
+      setRecentlyDeletedPosition(null);
+    }, 5000); // Hide the undo button after 5 seconds (you can adjust the duration as needed)
+  };
+
+  const undoDelete = () => {
+    if (recentlyDeletedPosition) {
+      axios
+        .post("http://localhost:5000/positions", recentlyDeletedPosition)
+        .then(() => {
+          setPositions((prevPositions) =>
+            [...prevPositions, recentlyDeletedPosition].sort(
+              (a, b) => a.id - b.id
+            )
+          );
+          setRecentlyDeletedPosition(null);
+        });
+    }
+  };
 
   const getParentPosition = (parentId: number | null) => {
     return parentId
@@ -207,12 +228,19 @@ export function PositionList() {
 
   return (
     <ScrollArea>
+      {recentlyDeletedPosition && (
+        <div className="mb-4">
+          <Button className="bg-green-700" onClick={undoDelete}>Undo Delete</Button>
+        </div>
+      )}
+
       <TextInput
         placeholder="Search Positions..."
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
         className="mb-4"
       />
+
       {editPosition && (
         <EditForm
           position={editPosition}

@@ -35,6 +35,9 @@ export const EmployeeList: React.FC = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const theme = useMantineTheme();
 
+  const [recentlyDeletedEmployee, setRecentlyDeletedEmployee] =
+    useState<Employee | null>(null);
+
   useEffect(() => {
     axios.get("http://localhost:5000/employees").then((response) => {
       setEmployees(response.data);
@@ -44,15 +47,33 @@ export const EmployeeList: React.FC = () => {
   const handleDeleteClick = (employee: Employee) => {
     setSelectedEmployee(employee);
     axios.delete(`http://localhost:5000/employees/${employee.id}`).then(() => {
+      setRecentlyDeletedEmployee(employee);
       setEmployees((prevEmployees) =>
         prevEmployees.filter((e) => e.id !== employee.id)
       );
       setSelectedEmployee(null);
+      showUndoButton();
     });
 
     window.alert(
       `Successfully Deleted  "{${employee.name}}" from position "{${employee.position}}"`
     );
+  };
+
+  const showUndoButton = () => {
+    setTimeout(() => {
+      setRecentlyDeletedEmployee(null);
+    }, 5000); // Hide the undo button after 5 seconds (you can adjust the duration as needed)
+  };
+
+  const undoDelete = () => {
+    if (recentlyDeletedEmployee) {
+      axios.post("http://localhost:5000/employees", recentlyDeletedEmployee);
+      setEmployees((prevEmployees) =>
+        [...prevEmployees, recentlyDeletedEmployee].sort((a, b) => a.id - b.id)
+      );
+      setRecentlyDeletedEmployee(null);
+    }
   };
 
   const handleEditClick = (employee: Employee) => {
@@ -71,7 +92,6 @@ export const EmployeeList: React.FC = () => {
           prevEmployees.map((e) =>
             e.id === updatedEmployee.id ? updatedEmployee : e
           )
-          
         );
         setSelectedEmployee(null);
         setIsEditMode(false);
@@ -140,6 +160,14 @@ export const EmployeeList: React.FC = () => {
 
   return (
     <div>
+      {recentlyDeletedEmployee && (
+        <div className="mb-4 ">
+          <Button className="bg-green-700 " onClick={undoDelete}>
+            Undo Delete
+          </Button>
+        </div>
+      )}
+
       {isEditMode && selectedEmployee && (
         <EmployeeEditForm
           employee={selectedEmployee}
@@ -193,6 +221,7 @@ interface Position {
   value: string;
   parentId: number | null;
 }
+
 const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
   employee,
   onUpdate,
@@ -256,3 +285,5 @@ const EmployeeEditForm: React.FC<EmployeeEditFormProps> = ({
     </form>
   );
 };
+
+export default EmployeeList;
