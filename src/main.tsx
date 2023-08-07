@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/chart",
+    path: "/backup",
     element: <BackupLayout/>,
     errorElement: <ErrorPage />,
   },

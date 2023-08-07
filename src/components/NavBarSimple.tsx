@@ -16,6 +16,7 @@ import {
   IconListDetails,
   IconLayoutList,
   IconTrash,
+  IconFileDatabase,
 } from "@tabler/icons-react";
 import logo from "../assets/perago.png";
 
@@ -90,12 +91,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: "/", label: "Registration Format", icon: IconEdit },
-  { link: "/chart", label: "Company Hierarchy", icon: IconHierarchy3 },
+  { link: "/", label: "Registration Format", icon: IconEdit, IconHierarchy3 },
   { link: "/list", label: "Employee List", icon: IconListDetails },
   { link: "/Position", label: "Position List", icon: IconLayoutList },
   { link: "/manage", label: "Deleted List", icon: IconTrash },
-  
+  { link: "/backup", label: "Backup", icon:IconFileDatabase },
   { link: "/error", label: "404", icon: IconError404 },
 ];
 
